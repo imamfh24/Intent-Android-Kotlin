@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() , View.OnClickListener{
 
@@ -19,13 +18,16 @@ class MainActivity : AppCompatActivity() , View.OnClickListener{
 
     private fun setView() {
         val btnMoveActivity: Button = findViewById(R.id.btn_move_activity)
-
-        setOnClickButton()
+        val btnMoveWithDataActivity: Button = findViewById(R.id.btn_move_activity_data)
+        btnMoveActivity.setOnClickListener(this)
+        btnMoveWithDataActivity.setOnClickListener(this)
+//        setOnClickButton()
     }
-
-    private fun setOnClickButton() {
-        btn_move_activity.setOnClickListener(this)
-    }
+//
+//    private fun setOnClickButton() {
+//        btn_move_activity.setOnClickListener(this)
+//        btn_move_activity_data.setOnClickListener(this)
+//    }
 
     override fun onStart() {
         super.onStart()
@@ -36,6 +38,12 @@ class MainActivity : AppCompatActivity() , View.OnClickListener{
             R.id.btn_move_activity -> {
                 val moveIntent = Intent(this, MoveActivity::class.java)
                 startActivity(moveIntent)
+            }
+            R.id.btn_move_activity_data -> {
+                val moveWithDataIntent = Intent(this, MoveWithDataActivity::class.java)
+                moveWithDataIntent.putExtra(MoveWithDataActivity.EXTRA_NAME, "Bang Ifa")
+                moveWithDataIntent.putExtra(MoveWithDataActivity.EXTRA_AGE, 21)
+                startActivity(moveWithDataIntent)
             }
         }
     }
